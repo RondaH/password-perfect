@@ -17,11 +17,12 @@ generateBtn.addEventListener("click", writePassword);
 //start coding here.
 
 // variables used
-var lowerletter=getRandomLower()
-var upperletter=getRandomUpper()
-var anynumber=getRandomNumber()
-var specialchar=getRandomSymbol()
+var lowerletter = "abcdefghijklmnopqrstuvwxyz"; 
+var upperletter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var anynumber = "0123456789";
+var specialchar = "!@#$%^&*()_+={}[];:'`~<,>.?/|";
 var passwordlength;
+var lowercase;
 var uppercase;
 var number;
 var symbol;
@@ -36,14 +37,39 @@ function stringlength(){
   }
   else if (passwordlength>128){
     alert("Please choose less than 128 characters");
+    stringlength();
   }
   else if (isNaN(passwordlength)){
     alert("Password must be a number between 8-128 characters");
   }
   else{
-    alert("The following screens will allow you to choose uppercase, numbers, symbols and lowercase by default");
+    alert("These screens will allow you to choose:  lowercase; uppercase, numbers, and symbols");
   }
   return passwordlength;
+}
+
+//Function to determine if lowercase characters are used
+function determineLowercase(){
+  lowercase = prompt("Do you want to include lowercase ? \n (Yes or No)");
+   lowercase = lowercase.toLowerCase();
+
+   if (lowercase === null || lowercase === ""){
+     alert("Please answer Yes or No");
+     determineLowercase();
+   }
+   else if (lowercase === "yes" || lowercase === "y"){
+     lowercase = true;
+     return lowercase;
+   }
+   else if (lowercase === "no" || lowercase ==="n"){
+     lowercase = false;
+     return lowercase;
+   }
+   else {
+     alert("Please answer Yes or No");
+     determineLowercase();
+   }
+   return lowercase;
 }
 
 //Function to determine if uppercase characters are used
@@ -123,6 +149,8 @@ function determineSymbol(){
 function generatePassword(){
   stringlength();
   console.log(passwordlength);
+  determineLowercase();
+  console.log(lowercase);
   determineUppercase();
   console.log(uppercase);
   determineNumber();
@@ -178,6 +206,6 @@ generateBtn.addEventListener("click", writePassword);
 
 
 
-// Generator functions - http://www.net-comber.com/charset.html
+
 
 
